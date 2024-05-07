@@ -49,6 +49,11 @@ namespace test.Controllers
                 return BadRequest(ModelState);
             }
 
+            if(bookDTO.Title.Length > 100)
+            {
+                return BadRequest();
+            }
+
             var response = await _bookRepository.AddBook(bookDTO);
 
             return CreatedAtAction(nameof(PostBook), new { id = response.Id }, response);
